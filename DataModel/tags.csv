@@ -1,0 +1,26 @@
+﻿#version 2 
+#Enterprise instances
+:Enterprise,historian
+SUNN3RGY,Historian
+
+#Plant instances
+:Plant,historian
+SUNN3RGY/BLUELAKE,<inherited>
+
+#Zone instances
+:Zone,historian
+SUNN3RGY/BLUELAKE/PVG001,<inherited>
+
+#KPI PVG instances
+:KPI PVG,historian
+SUNN3RGY/BLUELAKE/PVG001/KPI,<inherited>
+
+#Power Station instances
+:Power Station,cabin,historian
+SUNN3RGY/BLUELAKE/PVG001/PST001,PST001,<inherited>
+SUNN3RGY/BLUELAKE/PVG001/PST002,PST002,<inherited>
+SUNN3RGY/BLUELAKE/PVG001/PST003,PST003,<inherited>
+SUNN3RGY/BLUELAKE/PVG001/PST004,PST004,<inherited>
+SUNN3RGY/BLUELAKE/PVG001/PST005,PST005,<inherited>
+SUNN3RGY/BLUELAKE/PVG001/PST006,PST006,<inherited>
+

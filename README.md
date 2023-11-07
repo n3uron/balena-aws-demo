@@ -1,4 +1,4 @@
-# N3uron & balena demo
+# N3uron & balena demo on AWS
 
 ## Prerequisites
 

@@ -13,18 +13,18 @@ data "aws_ami" "ubuntu_22" {
   }
 }
 
-resource "aws_eip" "n3uron_central" {
-  instance = aws_instance.n3uron_central.id
+resource "aws_eip" "n3uron" {
+  instance = aws_instance.n3uron.id
 }
 
-resource "aws_instance" "n3uron_central" {
+resource "aws_instance" "n3uron" {
   ami                    = data.aws_ami.ubuntu_22.id
   instance_type          = "t4g.medium"
   key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.n3uron_central.id]
+  vpc_security_group_ids = [aws_security_group.n3uron.id]
 
   tags = {
-    Name = "N3CentralDemo"
+    Name = "sunn3rgy-eu-prod-01/n3uron"
   }
 
   root_block_device {
@@ -39,14 +39,14 @@ resource "aws_instance" "n3uron_central" {
     EOF
 }
 
-resource "aws_instance" "mongo_server" {
+resource "aws_instance" "mongodb" {
   ami                    = data.aws_ami.ubuntu_22.id
   instance_type          = "t4g.medium"
   key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.mongo_server.id]
+  vpc_security_group_ids = [aws_security_group.mongodb.id]
 
   tags = {
-    Name = "N3CentralDemo-DB"
+    Name = "sunn3rgy-eu-prod-01/mongo"
   }
 
   root_block_device {
@@ -61,14 +61,14 @@ resource "aws_instance" "mongo_server" {
       # Install Docker Engine
       curl -fsSL https://get.docker.com | sudo bash
       
-      sudo docker run -d --name mongodb-1 -p 27017:27017 mongo:7
+      docker run -d --name mongodb-1 -p 27017:27017 mongo:7
     EOF
 }
 
-output "n3uron_public_dns" {
-  value = aws_eip.n3uron_central.public_dns
+output "n3uron_public_address" {
+  value = "https://${aws_eip.n3uron.public_dns}:8443"
 }
 
-output "mongo_private_dns" {
-  value = aws_instance.mongo_server.private_dns
+output "mongodb_connection_url" {
+  value = "mongodb://${aws_instance.mongodb.private_dns}:27017/history?retryWrites=true"
 }

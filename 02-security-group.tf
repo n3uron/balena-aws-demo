@@ -1,4 +1,4 @@
-resource "aws_security_group" "n3uron_central" {
+resource "aws_security_group" "n3uron" {
   description = "Security group for N3uron"
 
   ingress {
@@ -37,7 +37,7 @@ resource "aws_security_group" "n3uron_central" {
   }
 }
 
-resource "aws_security_group" "mongo_server" {
+resource "aws_security_group" "mongodb" {
   description = "Security group for MongoDB"
 
   ingress {
@@ -51,7 +51,7 @@ resource "aws_security_group" "mongo_server" {
     from_port       = 27017
     to_port         = 27017
     protocol        = "tcp"
-    security_groups = [aws_security_group.n3uron_central.id]
+    security_groups = [aws_security_group.n3uron.id]
   }
 
   egress {

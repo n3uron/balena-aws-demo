@@ -19,3 +19,9 @@ Deploy the infrastructure to your AWS account
 ```shell
 terraform apply -var="key_name=<your-kp-name>"
 ```
+
+Delete everything at the end
+
+```shell
+terraform destroy
+```
